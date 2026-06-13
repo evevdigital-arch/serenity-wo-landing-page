@@ -75,8 +75,13 @@ export function PortfolioSection(_props: PortfolioSectionProps) {
         </div>
         <HorizontalScroll className="mt-12">
           {portfolioThemes.map((theme) => (
-            <CursorImageReveal key={theme.title} src={theme.image} alt={theme.alt}>
-              <article className="w-[82vw] shrink-0 snap-center overflow-hidden rounded-[40px] border border-wo-border bg-wo-surface shadow-soft md:w-[560px] lg:w-[680px]">
+            <CursorImageReveal 
+              key={theme.title} 
+              src={theme.image} 
+              alt={theme.alt}
+              className="w-[85vw] shrink-0 snap-center md:w-[560px] lg:w-[680px]"
+            >
+              <article className="w-full overflow-hidden rounded-[40px] border border-wo-border bg-wo-surface shadow-soft">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={theme.image}

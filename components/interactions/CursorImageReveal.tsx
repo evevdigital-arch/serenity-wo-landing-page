@@ -17,8 +17,9 @@ export function CursorImageReveal({
   src,
   alt,
   width = 320,
-  height = 240
-}: CursorImageRevealProps) {
+  height = 240,
+  className = ""
+}: CursorImageRevealProps & { className?: string }) {
   const [active, setActive] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -42,7 +43,7 @@ export function CursorImageReveal({
   }, [enabled]);
 
   return (
-    <div onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}>
+    <div className={className} onMouseEnter={() => setActive(true)} onMouseLeave={() => setActive(false)}>
       {children}
       {enabled && active ? (
         <div
