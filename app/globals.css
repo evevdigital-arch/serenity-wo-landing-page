@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.theme-wo {
+  --color-bg: #FDFAF7;
+  --color-surface: #FFFFFF;
+  --color-primary: #9D6B4E;
+  --color-text: #2C1810;
+  --color-text-soft: #5C4D46;
+  --color-text-muted: #8C7B72;
+  --color-border: #EDE0D8;
+  --color-accent-1: #F5E6E0;
+  --color-gold: #C9A96E;
+  --ease-award: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  scroll-behavior: auto;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: rgba(201, 169, 110, 0.35);
+  color: var(--color-text);
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .safe-bottom-12 {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .safe-bottom-24 {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .will-animate-transform {
+    will-change: transform;
+  }
+
+  .tap-target {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .cursor-desktop-enabled,
+  .cursor-desktop-enabled * {
+    cursor: none;
+  }
+
+  .desktop-hover-lift {
+    transition: transform 320ms var(--ease-award);
+  }
+
+  .desktop-hover-lift:hover {
+    transform: translate3d(0, -4px, 0) scale(1.02);
+  }
+}
+
+@media (hover: none) {
+  .mobile-active-feedback:active {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+@supports (view-transition-name: root) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 420ms;
+    animation-timing-function: var(--ease-award);
+  }
+}
+
+/* ====== EVEVDIGITAL WATERMARK ====== */
+.evev-watermark {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #888;
+  opacity: 0.3;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+}
+.evev-watermark:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.9);
+  color: #0a0a0a;
+  border-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
