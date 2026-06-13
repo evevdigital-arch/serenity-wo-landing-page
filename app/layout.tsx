@@ -15,6 +15,13 @@ const WA_MESSAGE = encodeURIComponent(
 );
 const WA_LINK = `https://api.whatsapp.com/send?phone=${WA_NUMBER}&text=${WA_MESSAGE}`;
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export const metadata: Metadata = {
   formatDetection: {
     telephone: false,

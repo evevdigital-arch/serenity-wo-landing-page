@@ -22,6 +22,8 @@
 
 html {
   min-height: 100%;
+  width: 100%;
+  max-width: 100vw;
   background: var(--color-bg);
   color: var(--color-text);
   scroll-behavior: auto;
@@ -33,12 +35,15 @@ html {
 
 body {
   min-height: 100%;
+  width: 100%;
+  max-width: 100vw;
   margin: 0;
   background: var(--color-bg);
   color: var(--color-text);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-size: 16px;
   overflow-x: hidden;
+  overflow-y: overlay;
 }
 
 a {
