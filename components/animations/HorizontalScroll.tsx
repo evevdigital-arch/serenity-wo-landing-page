@@ -4,7 +4,6 @@ import type { ReactNode } from "react";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "@/lib/gsap";
-import { useIsMobile } from "@/hooks/useIsMobile";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 interface HorizontalScrollProps {
@@ -15,30 +14,35 @@ interface HorizontalScrollProps {
 export function HorizontalScroll({ children, className = "" }: HorizontalScrollProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
   const reduceMotion = useReducedMotion();
 
   useGSAP(
     () => {
-      if (isMobile || reduceMotion || !sectionRef.current || !trackRef.current) return;
+      if (reduceMotion || !sectionRef.current || !trackRef.current) return;
 
-      const distance = trackRef.current.scrollWidth - window.innerWidth + 80;
-      if (distance <= 0) return;
+      const mm = gsap.matchMedia();
 
-      gsap.to(trackRef.current, {
-        x: -distance,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => `+=${distance}`,
-          pin: true,
-          scrub: 0.8,
-          invalidateOnRefresh: true
-        }
+      mm.add("(min-width: 1024px)", () => {
+        const distance = trackRef.current!.scrollWidth - window.innerWidth + 80;
+        if (distance <= 0) return;
+
+        gsap.to(trackRef.current, {
+          x: -distance,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: () => `+=${distance}`,
+            pin: true,
+            scrub: 0.8,
+            invalidateOnRefresh: true
+          }
+        });
       });
+
+      return () => mm.revert();
     },
-    { scope: sectionRef, dependencies: [isMobile, reduceMotion] }
+    { scope: sectionRef, dependencies: [reduceMotion] }
   );
 
   return (
